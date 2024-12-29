@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookstore-deployment
+  labels:
+    app: bookstore
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: bookstore
+  template:
+    metadata:
+      labels:
+        app: bookstore
+    spec:
+      containers:
+      - name: bookstore
+        image: nallaramasuryaprakash2002/bookstore:tag
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookstore-deployment-secondary
+  labels:
+    app: bookstore-secondary
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: bookstore-secondary
+  template:
+    metadata:
+      labels:
+        app: bookstore-secondary
+    spec:
+      containers:
+      - name: bookstore-secondary
+        image: nallaramasuryaprakash2002/bookstore:try
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
