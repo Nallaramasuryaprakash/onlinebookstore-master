@@ -16,4 +16,16 @@ spec:
       - name: bookstore
         image: nallaramasuryaprakash2002/bookstore:try
         ports:
-        - containerPort: 8081  # Change the container port to 8081
+        - containerPort: 8081
+        readinessProbe:  # Checks if the container is ready to serve requests
+          httpGet:
+            path: /health  # Adjust the path based on your application's health endpoint
+            port: 8081
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:  # Checks if the container is alive
+          httpGet:
+            path: /health  # Adjust the path based on your application's health endpoint
+            port: 8081
+          initialDelaySeconds: 10
+          periodSeconds: 15
