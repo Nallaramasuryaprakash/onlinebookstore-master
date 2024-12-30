@@ -4,7 +4,7 @@ metadata:
   name: bookstore-deployment
   annotations:
     description: "Deployment for Bookstore Application"
-    maintainer: "nallaramasuryaprakash@example.com"
+    maintainer: "nallaramasuryaprakash@gmail.com"
 spec:
   replicas: 2
   selector:
