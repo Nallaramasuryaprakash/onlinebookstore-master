@@ -3,19 +3,14 @@ kind: Service
 metadata:
   name: bookstore-service
   annotations:
-    service.beta.kubernetes.io/aws-load-balancer-type: "alb"  # Specify ALB
-    service.beta.kubernetes.io/aws-load-balancer-healthcheck-path: "/health"  # Health check endpoint
-    service.beta.kubernetes.io/aws-load-balancer-healthcheck-port: "8081"  # Port for health checks
-    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "HTTP"  # Protocol your app listens to
-    service.beta.kubernetes.io/aws-load-balancer-security-groups: "<security-group-id>"  # Replace with actual SG ID
-    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"  # Optional for SSL; specify if needed
-  labels:
-    app: bookstore
+    service.beta.kubernetes.io/aws-load-balancer-type: "alb"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-path: "/health"
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "HTTP"
 spec:
   selector:
     app: bookstore
   ports:
     - protocol: TCP
-      port: 80        # Expose port 80 externally
-      targetPort: 8081  # Forward traffic to port 8081 inside the container
+      port: 80
+      targetPort: 8081
   type: LoadBalancer
