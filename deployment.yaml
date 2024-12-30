@@ -2,6 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: bookstore-deployment
+  annotations:
+    description: "Deployment for Bookstore Application"
+    maintainer: "nallaramasuryaprakash@example.com"
 spec:
   replicas: 2
   selector:
@@ -17,15 +20,24 @@ spec:
         image: nallaramasuryaprakash2002/bookstore:try
         ports:
         - containerPort: 8081
-        readinessProbe:  # Checks if the container is ready to serve requests
+        readinessProbe:
           httpGet:
-            path: /health  # Adjust the path based on your application's health endpoint
-            port: 8081
-          initialDelaySeconds: 5
-          periodSeconds: 10
-        livenessProbe:  # Checks if the container is alive
-          httpGet:
-            path: /health  # Adjust the path based on your application's health endpoint
+            path: /health
             port: 8081
           initialDelaySeconds: 10
-          periodSeconds: 15
+          periodSeconds: 10
+          failureThreshold: 3
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8081
+          initialDelaySeconds: 15
+          periodSeconds: 20
+          failureThreshold: 3
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "1Gi"
+            cpu: "1"
