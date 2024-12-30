@@ -16,26 +16,4 @@ spec:
       - name: bookstore
         image: nallaramasuryaprakash2002/bookstore:try
         ports:
-        - containerPort: 8081  # Container listens on port 8081
-        # Add readiness and liveness probes
-        readinessProbe:
-          httpGet:
-            path: /health  # Make sure your app has this endpoint or adjust as needed
-            port: 8081
-            httpHeaders:
-              - name: X-Readiness-Probe
-                value: "true"
-          initialDelaySeconds: 5  # Wait 5 seconds before probing
-          periodSeconds: 5  # Probe every 5 seconds
-          failureThreshold: 3  # Probe will fail after 3 unsuccessful attempts
-
-        livenessProbe:
-          httpGet:
-            path: /health  # Same path as readiness or adjust as needed
-            port: 8081
-            httpHeaders:
-              - name: X-Liveness-Probe
-                value: "true"
-          initialDelaySeconds: 10  # Wait 10 seconds before probing
-          periodSeconds: 10  # Probe every 10 seconds
-          failureThreshold: 3  # Probe will fail after 3 unsuccessful attempts
+        - containerPort: 8081  # Change the container port to 8081
