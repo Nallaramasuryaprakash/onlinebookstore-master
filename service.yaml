@@ -3,14 +3,12 @@ kind: Service
 metadata:
   name: bookstore-service
   annotations:
-    service.beta.kubernetes.io/aws-load-balancer-type: "alb"
-    service.beta.kubernetes.io/aws-load-balancer-healthcheck-path: "/health"
-    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "TCP"
+    service.beta.kubernetes.io/aws-load-balancer-type: "external"  # Use existing external load balancer
 spec:
   selector:
-    app: bookstore
+    app: bookstore  # Matches the labels in the Deployment
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 8081
-  type: LoadBalancer
+      port: 80  # Port the load balancer listens on
+      targetPort: 8081  # Port your app is exposed on
+  type: NodePort
