@@ -17,15 +17,3 @@ spec:
         image: nallaramasuryaprakash2002/bookstore:try
         ports:
         - containerPort: 8081
-        readinessProbe:  
-          httpGet:
-            path: /health
-            port: 8081
-          initialDelaySeconds: 5
-          periodSeconds: 10
-        livenessProbe: 
-          httpGet:
-            path: /health
-            port: 8081
-          initialDelaySeconds: 10
-          periodSeconds: 15
