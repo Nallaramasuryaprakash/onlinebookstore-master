@@ -2,13 +2,12 @@ apiVersion: v1
 kind: Service
 metadata:
   name: bookstore-service
-  annotations:
-    service.beta.kubernetes.io/aws-load-balancer-type: "external"  # Use existing external load balancer
 spec:
   selector:
     app: bookstore  # Matches the labels in the Deployment
   ports:
     - protocol: TCP
-      port: 80  # Port the load balancer listens on
-      targetPort: 8081  # Port your app is exposed on
-  type: NodePort
+      port: 80        # External port exposed by the service
+      targetPort: 8081 # Port your app is running on
+      nodePort: 31000  # Custom NodePort (optional)
+  type: NodePort      # Exposing service using NodePort (no external load balancer)
